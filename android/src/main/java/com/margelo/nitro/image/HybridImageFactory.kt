@@ -34,6 +34,10 @@ class HybridImageFactory: HybridImageFactorySpec() {
         }
     }
 
+    override fun loadFromAssetAsync(assetName: String): Promise<HybridImageSpec> {
+        throw Error("ImageFactory.loadFromAssetAsync(assetName:options:) is not supported on Android!")
+    }
+
     @SuppressLint("DiscouragedApi")
     override fun loadFromResources(name: String): HybridImageSpec {
         val context = NitroModules.applicationContext ?: throw Error("No context!")
