@@ -21,6 +21,11 @@ jobs:
       
       - name: Install dependencies
         run: bun install
+
+      - name: Check Versions
+        run: |
+          bun --version
+          bunx biome --version
       
       - name: Run Biome
         run: bun lint-ci
