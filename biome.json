@@ -7,7 +7,9 @@
 	},
 	"files": {
 		"ignoreUnknown": false,
-		"includes": ["**", "!**/ios/**", "!**/android/**"]
+		"includes": [
+			"package.json"
+		]
 	},
 	"formatter": {
 		"enabled": true,
