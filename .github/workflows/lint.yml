@@ -29,5 +29,3 @@ jobs:
       
       - name: Run Biome
         run: bun lint-ci
-        env:
-          CI: true
