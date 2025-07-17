@@ -8,6 +8,7 @@
 import Foundation
 import NitroModules
 import SDWebImage
+import Photos
 
 class HybridImageFactory: HybridImageFactorySpec {
   private let queue = DispatchQueue(label: "image-loader",
@@ -21,11 +22,74 @@ class HybridImageFactory: HybridImageFactorySpec {
     guard let url = URL(string: urlString) else {
       throw RuntimeError.error(withMessage: "URL string \"\(urlString)\" is not a valid URL!")
     }
-
+    
     return Promise.async {
       let webImageOptions = options?.toSDWebImageOptions() ?? []
       let uiImage = try await SDWebImageManager.shared.loadImage(with: url, options: webImageOptions)
       return HybridImage(uiImage: uiImage)
+    }
+  }
+  
+  /**
+   * Load Image from Photo Library Asset ID
+   */
+  func loadFromAssetAsync(assetId: String, options: AssetImageLoadOptions?) throws -> Promise<any HybridImageSpec> {
+    let assets = PHAsset.fetchAssets(
+      withLocalIdentifiers: [assetId],
+      options: nil
+    )
+    guard let asset = assets.firstObject else {
+      throw RuntimeError.error(withMessage: "Asset with ID \(assetId) was not found!")
+    }
+    
+    return Promise.async {
+      return try await withCheckedThrowingContinuation { continuation in
+        let requestOptions = PHImageRequestOptions()
+        requestOptions.version = .current
+        requestOptions.deliveryMode = .highQualityFormat
+        requestOptions.isNetworkAccessAllowed = true
+        
+        
+        if let size = options?.size {
+          let contentMode = PHImageContentMode(options?.aspectFit)
+          
+          PHImageManager.default().requestImage(
+            for: asset,
+            targetSize: CGSize(width: size.width, height: size.height),
+            contentMode: contentMode,
+            options: requestOptions
+          ) { (image, info) in
+            if let error = info?[PHImageErrorKey] as? Error {
+              continuation.resume(throwing: error)
+            } else if let image = image {
+              continuation
+                .resume(returning: HybridImage(uiImage: image))
+            } else {
+              continuation.resume(
+                throwing: RuntimeError.error(withMessage: "Failed to load or convert image")
+              )
+            }
+          }
+        } else {
+          PHImageManager.default().requestImageDataAndOrientation(
+            for: asset,
+            options: requestOptions
+          ) { (imageData, dataUTI, orientation, info) in
+            
+            if let error = info?[PHImageErrorKey] as? Error {
+              continuation.resume(throwing: error)
+            } else if let imageData = imageData,
+                      let cgImage = UIImage(data: imageData)?.cgImage {
+              let uiImage = UIImage(cgImage: cgImage, scale: 1, orientation: UIImage.Orientation(orientation))
+              continuation.resume(returning: HybridImage(uiImage: uiImage))
+            } else {
+              continuation.resume(
+                throwing: RuntimeError.error(withMessage: "Failed to load or convert image")
+              )
+            }
+          }
+        }
+      }
     }
   }
   
@@ -99,6 +163,32 @@ class HybridImageFactory: HybridImageFactorySpec {
     return Promise.async {
       let uiImage = thumbHashToImage(hash: data)
       return HybridImage(uiImage: uiImage)
+    }
+  }
+}
+
+extension UIImage.Orientation {
+  init(_ cgOrientation: CGImagePropertyOrientation) {
+    switch cgOrientation {
+    case .up: self = .up
+    case .upMirrored: self = .upMirrored
+    case .down: self = .down
+    case .downMirrored: self = .downMirrored
+    case .left: self = .left
+    case .leftMirrored: self = .leftMirrored
+    case .right: self = .right
+    case .rightMirrored: self = .rightMirrored
+    }
+  }
+}
+
+extension PHImageContentMode {
+  init(_ aspectFit: AspectFit?) {
+    switch aspectFit {
+    case .some(.fit), .none:
+      self = .aspectFit
+    case .some(.fill):
+      self = .aspectFill
     }
   }
 }
