@@ -12,6 +12,8 @@
 namespace NitroModules { class ArrayBufferHolder; }
 // Forward declaration of `ArrayBuffer` to properly resolve imports.
 namespace NitroModules { class ArrayBuffer; }
+// Forward declaration of `AspectFit` to properly resolve imports.
+namespace margelo::nitro::image { enum class AspectFit; }
 // Forward declaration of `AssetImageLoadOptions` to properly resolve imports.
 namespace margelo::nitro::image { struct AssetImageLoadOptions; }
 // Forward declaration of `AsyncImageLoadOptions` to properly resolve imports.
@@ -40,6 +42,7 @@ namespace NitroImage { class HybridImageUtilsSpec_cxx; }
 namespace NitroImage { class HybridNitroImageViewSpec_cxx; }
 
 // Include C++ defined types
+#include "AspectFit.hpp"
 #include "AssetImageLoadOptions.hpp"
 #include "AsyncImageLoadOptions.hpp"
 #include "AsyncImagePriority.hpp"
@@ -323,6 +326,15 @@ namespace margelo::nitro::image::bridge::swift {
   using std__optional_ImageSize_ = std::optional<ImageSize>;
   inline std::optional<ImageSize> create_std__optional_ImageSize_(const ImageSize& value) {
     return std::optional<ImageSize>(value);
+  }
+  
+  // pragma MARK: std::optional<AspectFit>
+  /**
+   * Specialized version of `std::optional<AspectFit>`.
+   */
+  using std__optional_AspectFit_ = std::optional<AspectFit>;
+  inline std::optional<AspectFit> create_std__optional_AspectFit_(const AspectFit& value) {
+    return std::optional<AspectFit>(value);
   }
   
   // pragma MARK: std::optional<AssetImageLoadOptions>

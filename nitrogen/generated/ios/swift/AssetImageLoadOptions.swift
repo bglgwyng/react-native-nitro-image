@@ -18,10 +18,16 @@ public extension AssetImageLoadOptions {
   /**
    * Create a new instance of `AssetImageLoadOptions`.
    */
-  init(hi: Double, size: ImageSize?) {
+  init(hi: Double, size: ImageSize?, aspectFit: AspectFit?) {
     self.init(hi, { () -> bridge.std__optional_ImageSize_ in
       if let __unwrappedValue = size {
         return bridge.create_std__optional_ImageSize_(__unwrappedValue)
+      } else {
+        return .init()
+      }
+    }(), { () -> bridge.std__optional_AspectFit_ in
+      if let __unwrappedValue = aspectFit {
+        return bridge.create_std__optional_AspectFit_(__unwrappedValue)
       } else {
         return .init()
       }
@@ -55,6 +61,23 @@ public extension AssetImageLoadOptions {
       self.__size = { () -> bridge.std__optional_ImageSize_ in
         if let __unwrappedValue = newValue {
           return bridge.create_std__optional_ImageSize_(__unwrappedValue)
+        } else {
+          return .init()
+        }
+      }()
+    }
+  }
+  
+  var aspectFit: AspectFit? {
+    @inline(__always)
+    get {
+      return self.__aspectFit.value
+    }
+    @inline(__always)
+    set {
+      self.__aspectFit = { () -> bridge.std__optional_AspectFit_ in
+        if let __unwrappedValue = newValue {
+          return bridge.create_std__optional_AspectFit_(__unwrappedValue)
         } else {
           return .init()
         }

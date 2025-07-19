@@ -10,6 +10,8 @@
 // Forward declarations of C++ defined types
 // Forward declaration of `ArrayBuffer` to properly resolve imports.
 namespace NitroModules { class ArrayBuffer; }
+// Forward declaration of `AspectFit` to properly resolve imports.
+namespace margelo::nitro::image { enum class AspectFit; }
 // Forward declaration of `AssetImageLoadOptions` to properly resolve imports.
 namespace margelo::nitro::image { struct AssetImageLoadOptions; }
 // Forward declaration of `AsyncImageLoadOptions` to properly resolve imports.
@@ -30,6 +32,7 @@ namespace margelo::nitro::image { enum class ImageFormat; }
 namespace margelo::nitro::image { struct ImageSize; }
 
 // Include C++ defined types
+#include "AspectFit.hpp"
 #include "AssetImageLoadOptions.hpp"
 #include "AsyncImageLoadOptions.hpp"
 #include "AsyncImagePriority.hpp"

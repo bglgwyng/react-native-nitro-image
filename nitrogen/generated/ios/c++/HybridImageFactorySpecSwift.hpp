@@ -22,6 +22,8 @@ namespace margelo::nitro::image { enum class AsyncImagePriority; }
 namespace margelo::nitro::image { struct AssetImageLoadOptions; }
 // Forward declaration of `ImageSize` to properly resolve imports.
 namespace margelo::nitro::image { struct ImageSize; }
+// Forward declaration of `AspectFit` to properly resolve imports.
+namespace margelo::nitro::image { enum class AspectFit; }
 // Forward declaration of `ArrayBuffer` to properly resolve imports.
 namespace NitroModules { class ArrayBuffer; }
 // Forward declaration of `ArrayBufferHolder` to properly resolve imports.
@@ -36,6 +38,7 @@ namespace NitroModules { class ArrayBufferHolder; }
 #include "AsyncImagePriority.hpp"
 #include "AssetImageLoadOptions.hpp"
 #include "ImageSize.hpp"
+#include "AspectFit.hpp"
 #include <NitroModules/ArrayBuffer.hpp>
 #include <NitroModules/ArrayBufferHolder.hpp>
 

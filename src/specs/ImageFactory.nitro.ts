@@ -75,6 +75,12 @@ export interface AssetImageLoadOptions {
      * Specifies the size of the image.
      */
     size?: ImageSize;
+
+    /**
+     * Specifies the aspect fit of the image.
+     * @default 'fit'
+     */
+    aspectFit?: AspectFit;
 }
 
 export interface ImageFactory
