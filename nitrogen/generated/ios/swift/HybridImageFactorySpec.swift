@@ -15,15 +15,16 @@ public protocol HybridImageFactorySpec_protocol: HybridObject {
 
   // Methods
   func loadFromURLAsync(url: String, options: AsyncImageLoadOptions?) throws -> Promise<(any HybridImageSpec)>
+  func loadFromAssetAsync(assetId: String, options: AssetImageLoadOptions?) throws -> Promise<(any HybridImageSpec)>
   func loadFromFile(filePath: String) throws -> (any HybridImageSpec)
   func loadFromFileAsync(filePath: String) throws -> Promise<(any HybridImageSpec)>
   func loadFromResources(name: String) throws -> (any HybridImageSpec)
   func loadFromResourcesAsync(name: String) throws -> Promise<(any HybridImageSpec)>
   func loadFromSymbol(symbolName: String) throws -> (any HybridImageSpec)
-  func loadFromArrayBuffer(buffer: ArrayBufferHolder) throws -> (any HybridImageSpec)
-  func loadFromArrayBufferAsync(buffer: ArrayBufferHolder) throws -> Promise<(any HybridImageSpec)>
-  func loadFromThumbHash(thumbhash: ArrayBufferHolder) throws -> (any HybridImageSpec)
-  func loadFromThumbHashAsync(thumbhash: ArrayBufferHolder) throws -> Promise<(any HybridImageSpec)>
+  func loadFromArrayBuffer(buffer: ArrayBuffer) throws -> (any HybridImageSpec)
+  func loadFromArrayBufferAsync(buffer: ArrayBuffer) throws -> Promise<(any HybridImageSpec)>
+  func loadFromThumbHash(thumbhash: ArrayBuffer) throws -> (any HybridImageSpec)
+  func loadFromThumbHashAsync(thumbhash: ArrayBuffer) throws -> Promise<(any HybridImageSpec)>
 }
 
 /// See ``HybridImageFactorySpec``

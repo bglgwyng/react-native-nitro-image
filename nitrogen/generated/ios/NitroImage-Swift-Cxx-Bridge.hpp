@@ -12,6 +12,10 @@
 namespace NitroModules { class ArrayBufferHolder; }
 // Forward declaration of `ArrayBuffer` to properly resolve imports.
 namespace NitroModules { class ArrayBuffer; }
+// Forward declaration of `AspectFit` to properly resolve imports.
+namespace margelo::nitro::image { enum class AspectFit; }
+// Forward declaration of `AssetImageLoadOptions` to properly resolve imports.
+namespace margelo::nitro::image { struct AssetImageLoadOptions; }
 // Forward declaration of `AsyncImageLoadOptions` to properly resolve imports.
 namespace margelo::nitro::image { struct AsyncImageLoadOptions; }
 // Forward declaration of `AsyncImagePriority` to properly resolve imports.
@@ -24,6 +28,8 @@ namespace margelo::nitro::image { class HybridImageSpec; }
 namespace margelo::nitro::image { class HybridImageUtilsSpec; }
 // Forward declaration of `HybridNitroImageViewSpec` to properly resolve imports.
 namespace margelo::nitro::image { class HybridNitroImageViewSpec; }
+// Forward declaration of `ImageSize` to properly resolve imports.
+namespace margelo::nitro::image { struct ImageSize; }
 
 // Forward declarations of Swift defined types
 // Forward declaration of `HybridImageFactorySpec_cxx` to properly resolve imports.
@@ -36,12 +42,15 @@ namespace NitroImage { class HybridImageUtilsSpec_cxx; }
 namespace NitroImage { class HybridNitroImageViewSpec_cxx; }
 
 // Include C++ defined types
+#include "AspectFit.hpp"
+#include "AssetImageLoadOptions.hpp"
 #include "AsyncImageLoadOptions.hpp"
 #include "AsyncImagePriority.hpp"
 #include "HybridImageFactorySpec.hpp"
 #include "HybridImageSpec.hpp"
 #include "HybridImageUtilsSpec.hpp"
 #include "HybridNitroImageViewSpec.hpp"
+#include "ImageSize.hpp"
 #include <NitroModules/ArrayBuffer.hpp>
 #include <NitroModules/ArrayBufferHolder.hpp>
 #include <NitroModules/Promise.hpp>
@@ -81,13 +90,13 @@ namespace margelo::nitro::image::bridge::swift {
    */
   class Func_void_std__shared_ptr_ArrayBuffer__Wrapper final {
   public:
-    explicit Func_void_std__shared_ptr_ArrayBuffer__Wrapper(std::function<void(const std::shared_ptr<ArrayBuffer>& /* result */)>&& func): _function(std::make_shared<std::function<void(const std::shared_ptr<ArrayBuffer>& /* result */)>>(std::move(func))) {}
+    explicit Func_void_std__shared_ptr_ArrayBuffer__Wrapper(std::function<void(const std::shared_ptr<ArrayBuffer>& /* result */)>&& func): _function(std::make_unique<std::function<void(const std::shared_ptr<ArrayBuffer>& /* result */)>>(std::move(func))) {}
     inline void call(ArrayBufferHolder result) const {
       _function->operator()(result.getArrayBuffer());
     }
   private:
-    std::shared_ptr<std::function<void(const std::shared_ptr<ArrayBuffer>& /* result */)>> _function;
-  };
+    std::unique_ptr<std::function<void(const std::shared_ptr<ArrayBuffer>& /* result */)>> _function;
+  } SWIFT_NONCOPYABLE;
   Func_void_std__shared_ptr_ArrayBuffer_ create_Func_void_std__shared_ptr_ArrayBuffer_(void* _Nonnull swiftClosureWrapper);
   inline Func_void_std__shared_ptr_ArrayBuffer__Wrapper wrap_Func_void_std__shared_ptr_ArrayBuffer_(Func_void_std__shared_ptr_ArrayBuffer_ value) {
     return Func_void_std__shared_ptr_ArrayBuffer__Wrapper(std::move(value));
@@ -103,13 +112,13 @@ namespace margelo::nitro::image::bridge::swift {
    */
   class Func_void_std__exception_ptr_Wrapper final {
   public:
-    explicit Func_void_std__exception_ptr_Wrapper(std::function<void(const std::exception_ptr& /* error */)>&& func): _function(std::make_shared<std::function<void(const std::exception_ptr& /* error */)>>(std::move(func))) {}
+    explicit Func_void_std__exception_ptr_Wrapper(std::function<void(const std::exception_ptr& /* error */)>&& func): _function(std::make_unique<std::function<void(const std::exception_ptr& /* error */)>>(std::move(func))) {}
     inline void call(std::exception_ptr error) const {
       _function->operator()(error);
     }
   private:
-    std::shared_ptr<std::function<void(const std::exception_ptr& /* error */)>> _function;
-  };
+    std::unique_ptr<std::function<void(const std::exception_ptr& /* error */)>> _function;
+  } SWIFT_NONCOPYABLE;
   Func_void_std__exception_ptr create_Func_void_std__exception_ptr(void* _Nonnull swiftClosureWrapper);
   inline Func_void_std__exception_ptr_Wrapper wrap_Func_void_std__exception_ptr(Func_void_std__exception_ptr value) {
     return Func_void_std__exception_ptr_Wrapper(std::move(value));
@@ -149,13 +158,13 @@ namespace margelo::nitro::image::bridge::swift {
    */
   class Func_void_std__shared_ptr_margelo__nitro__image__HybridImageSpec__Wrapper final {
   public:
-    explicit Func_void_std__shared_ptr_margelo__nitro__image__HybridImageSpec__Wrapper(std::function<void(const std::shared_ptr<margelo::nitro::image::HybridImageSpec>& /* result */)>&& func): _function(std::make_shared<std::function<void(const std::shared_ptr<margelo::nitro::image::HybridImageSpec>& /* result */)>>(std::move(func))) {}
+    explicit Func_void_std__shared_ptr_margelo__nitro__image__HybridImageSpec__Wrapper(std::function<void(const std::shared_ptr<margelo::nitro::image::HybridImageSpec>& /* result */)>&& func): _function(std::make_unique<std::function<void(const std::shared_ptr<margelo::nitro::image::HybridImageSpec>& /* result */)>>(std::move(func))) {}
     inline void call(std::shared_ptr<margelo::nitro::image::HybridImageSpec> result) const {
       _function->operator()(result);
     }
   private:
-    std::shared_ptr<std::function<void(const std::shared_ptr<margelo::nitro::image::HybridImageSpec>& /* result */)>> _function;
-  };
+    std::unique_ptr<std::function<void(const std::shared_ptr<margelo::nitro::image::HybridImageSpec>& /* result */)>> _function;
+  } SWIFT_NONCOPYABLE;
   Func_void_std__shared_ptr_margelo__nitro__image__HybridImageSpec_ create_Func_void_std__shared_ptr_margelo__nitro__image__HybridImageSpec_(void* _Nonnull swiftClosureWrapper);
   inline Func_void_std__shared_ptr_margelo__nitro__image__HybridImageSpec__Wrapper wrap_Func_void_std__shared_ptr_margelo__nitro__image__HybridImageSpec_(Func_void_std__shared_ptr_margelo__nitro__image__HybridImageSpec_ value) {
     return Func_void_std__shared_ptr_margelo__nitro__image__HybridImageSpec__Wrapper(std::move(value));
@@ -183,13 +192,13 @@ namespace margelo::nitro::image::bridge::swift {
    */
   class Func_void_Wrapper final {
   public:
-    explicit Func_void_Wrapper(std::function<void()>&& func): _function(std::make_shared<std::function<void()>>(std::move(func))) {}
+    explicit Func_void_Wrapper(std::function<void()>&& func): _function(std::make_unique<std::function<void()>>(std::move(func))) {}
     inline void call() const {
       _function->operator()();
     }
   private:
-    std::shared_ptr<std::function<void()>> _function;
-  };
+    std::unique_ptr<std::function<void()>> _function;
+  } SWIFT_NONCOPYABLE;
   Func_void create_Func_void(void* _Nonnull swiftClosureWrapper);
   inline Func_void_Wrapper wrap_Func_void(Func_void value) {
     return Func_void_Wrapper(std::move(value));
@@ -217,13 +226,13 @@ namespace margelo::nitro::image::bridge::swift {
    */
   class Func_void_std__string_Wrapper final {
   public:
-    explicit Func_void_std__string_Wrapper(std::function<void(const std::string& /* result */)>&& func): _function(std::make_shared<std::function<void(const std::string& /* result */)>>(std::move(func))) {}
+    explicit Func_void_std__string_Wrapper(std::function<void(const std::string& /* result */)>&& func): _function(std::make_unique<std::function<void(const std::string& /* result */)>>(std::move(func))) {}
     inline void call(std::string result) const {
       _function->operator()(result);
     }
   private:
-    std::shared_ptr<std::function<void(const std::string& /* result */)>> _function;
-  };
+    std::unique_ptr<std::function<void(const std::string& /* result */)>> _function;
+  } SWIFT_NONCOPYABLE;
   Func_void_std__string create_Func_void_std__string(void* _Nonnull swiftClosureWrapper);
   inline Func_void_std__string_Wrapper wrap_Func_void_std__string(Func_void_std__string value) {
     return Func_void_std__string_Wrapper(std::move(value));
@@ -308,6 +317,33 @@ namespace margelo::nitro::image::bridge::swift {
   using std__optional_AsyncImageLoadOptions_ = std::optional<AsyncImageLoadOptions>;
   inline std::optional<AsyncImageLoadOptions> create_std__optional_AsyncImageLoadOptions_(const AsyncImageLoadOptions& value) {
     return std::optional<AsyncImageLoadOptions>(value);
+  }
+  
+  // pragma MARK: std::optional<ImageSize>
+  /**
+   * Specialized version of `std::optional<ImageSize>`.
+   */
+  using std__optional_ImageSize_ = std::optional<ImageSize>;
+  inline std::optional<ImageSize> create_std__optional_ImageSize_(const ImageSize& value) {
+    return std::optional<ImageSize>(value);
+  }
+  
+  // pragma MARK: std::optional<AspectFit>
+  /**
+   * Specialized version of `std::optional<AspectFit>`.
+   */
+  using std__optional_AspectFit_ = std::optional<AspectFit>;
+  inline std::optional<AspectFit> create_std__optional_AspectFit_(const AspectFit& value) {
+    return std::optional<AspectFit>(value);
+  }
+  
+  // pragma MARK: std::optional<AssetImageLoadOptions>
+  /**
+   * Specialized version of `std::optional<AssetImageLoadOptions>`.
+   */
+  using std__optional_AssetImageLoadOptions_ = std::optional<AssetImageLoadOptions>;
+  inline std::optional<AssetImageLoadOptions> create_std__optional_AssetImageLoadOptions_(const AssetImageLoadOptions& value) {
+    return std::optional<AssetImageLoadOptions>(value);
   }
   
   // pragma MARK: std::shared_ptr<margelo::nitro::image::HybridImageFactorySpec>

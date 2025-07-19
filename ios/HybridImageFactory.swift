@@ -28,6 +28,13 @@ class HybridImageFactory: HybridImageFactorySpec {
       return HybridImage(uiImage: uiImage)
     }
   }
+
+  /**
+   * Load Image from URL
+   */
+  func loadFromAssetAsync(assetId assetId: String, options: AssetImageLoadOptions?) throws -> Promise<any HybridImageSpec> {
+    throw RuntimeError.error(withMessage: "Not implemented!")
+  }
   
   /**
    * Load Image from file path
