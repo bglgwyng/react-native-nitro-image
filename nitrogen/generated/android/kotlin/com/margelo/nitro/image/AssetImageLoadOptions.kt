@@ -20,9 +20,8 @@ data class AssetImageLoadOptions
   @DoNotStrip
   @Keep
   constructor(
-    val hi: Double,
     val size: ImageSize?,
-    val aspectFit: AspectFit?
+    val aspectFit: AspectFit
   ) {
   /* main constructor */
 }

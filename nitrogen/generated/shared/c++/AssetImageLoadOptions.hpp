@@ -34,13 +34,12 @@ namespace margelo::nitro::image {
    */
   struct AssetImageLoadOptions {
   public:
-    double hi     SWIFT_PRIVATE;
     std::optional<ImageSize> size     SWIFT_PRIVATE;
-    std::optional<AspectFit> aspectFit     SWIFT_PRIVATE;
+    AspectFit aspectFit     SWIFT_PRIVATE;
 
   public:
     AssetImageLoadOptions() = default;
-    explicit AssetImageLoadOptions(double hi, std::optional<ImageSize> size, std::optional<AspectFit> aspectFit): hi(hi), size(size), aspectFit(aspectFit) {}
+    explicit AssetImageLoadOptions(std::optional<ImageSize> size, AspectFit aspectFit): size(size), aspectFit(aspectFit) {}
   };
 
 } // namespace margelo::nitro::image
@@ -55,16 +54,14 @@ namespace margelo::nitro {
     static inline AssetImageLoadOptions fromJSI(jsi::Runtime& runtime, const jsi::Value& arg) {
       jsi::Object obj = arg.asObject(runtime);
       return AssetImageLoadOptions(
-        JSIConverter<double>::fromJSI(runtime, obj.getProperty(runtime, "hi")),
         JSIConverter<std::optional<ImageSize>>::fromJSI(runtime, obj.getProperty(runtime, "size")),
-        JSIConverter<std::optional<AspectFit>>::fromJSI(runtime, obj.getProperty(runtime, "aspectFit"))
+        JSIConverter<AspectFit>::fromJSI(runtime, obj.getProperty(runtime, "aspectFit"))
       );
     }
     static inline jsi::Value toJSI(jsi::Runtime& runtime, const AssetImageLoadOptions& arg) {
       jsi::Object obj(runtime);
-      obj.setProperty(runtime, "hi", JSIConverter<double>::toJSI(runtime, arg.hi));
       obj.setProperty(runtime, "size", JSIConverter<std::optional<ImageSize>>::toJSI(runtime, arg.size));
-      obj.setProperty(runtime, "aspectFit", JSIConverter<std::optional<AspectFit>>::toJSI(runtime, arg.aspectFit));
+      obj.setProperty(runtime, "aspectFit", JSIConverter<AspectFit>::toJSI(runtime, arg.aspectFit));
       return obj;
     }
     static inline bool canConvert(jsi::Runtime& runtime, const jsi::Value& value) {
@@ -72,9 +69,8 @@ namespace margelo::nitro {
         return false;
       }
       jsi::Object obj = value.getObject(runtime);
-      if (!JSIConverter<double>::canConvert(runtime, obj.getProperty(runtime, "hi"))) return false;
       if (!JSIConverter<std::optional<ImageSize>>::canConvert(runtime, obj.getProperty(runtime, "size"))) return false;
-      if (!JSIConverter<std::optional<AspectFit>>::canConvert(runtime, obj.getProperty(runtime, "aspectFit"))) return false;
+      if (!JSIConverter<AspectFit>::canConvert(runtime, obj.getProperty(runtime, "aspectFit"))) return false;
       return true;
     }
   };
