@@ -34,7 +34,7 @@ class HybridImageFactory: HybridImageFactorySpec() {
         }
     }
 
-    override fun loadFromAssetAsync(assetName: String): Promise<HybridImageSpec> {
+    override fun loadFromAssetAsync(assetName: String, options: AssetImageLoadOptions?): Promise<HybridImageSpec> {
         throw Error("ImageFactory.loadFromAssetAsync(assetName:options:) is not supported on Android!")
     }
 

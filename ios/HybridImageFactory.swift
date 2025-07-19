@@ -32,7 +32,7 @@ class HybridImageFactory: HybridImageFactorySpec {
   /**
    * Load Image from URL
    */
-  func loadFromAssetAsync(assetId assetId: String) throws -> Promise<any HybridImageSpec> {
+  func loadFromAssetAsync(assetId assetId: String, options: AssetImageLoadOptions?) throws -> Promise<any HybridImageSpec> {
     throw RuntimeError.error(withMessage: "Not implemented!")
   }
   
