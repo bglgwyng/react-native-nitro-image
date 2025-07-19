@@ -77,4 +77,5 @@ jobs:
           -destination 'platform=iOS Simulator,name=iPhone 16' \
           build \
           CODE_SIGNING_ALLOWED=NO \
-          IPHONEOS_DEPLOYMENT_TARGET=16.0"
+          IPHONEOS_DEPLOYMENT_TARGET=16.0 \
+          SWIFT_VERSION=6.0"
