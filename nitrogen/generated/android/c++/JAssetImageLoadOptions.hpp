@@ -10,7 +10,9 @@
 #include <fbjni/fbjni.h>
 #include "AssetImageLoadOptions.hpp"
 
-
+#include "ImageSize.hpp"
+#include "JImageSize.hpp"
+#include <optional>
 
 namespace margelo::nitro::image {
 
@@ -33,8 +35,11 @@ namespace margelo::nitro::image {
       static const auto clazz = javaClassStatic();
       static const auto fieldHi = clazz->getField<double>("hi");
       double hi = this->getFieldValue(fieldHi);
+      static const auto fieldSize = clazz->getField<JImageSize>("size");
+      jni::local_ref<JImageSize> size = this->getFieldValue(fieldSize);
       return AssetImageLoadOptions(
-        hi
+        hi,
+        size != nullptr ? std::make_optional(size->toCpp()) : std::nullopt
       );
     }
 
@@ -45,7 +50,8 @@ namespace margelo::nitro::image {
     [[maybe_unused]]
     static jni::local_ref<JAssetImageLoadOptions::javaobject> fromCpp(const AssetImageLoadOptions& value) {
       return newInstance(
-        value.hi
+        value.hi,
+        value.size.has_value() ? JImageSize::fromCpp(value.size.value()) : nullptr
       );
     }
   };

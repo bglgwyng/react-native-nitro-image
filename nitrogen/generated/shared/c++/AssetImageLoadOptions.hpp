@@ -18,9 +18,11 @@
 #error NitroModules cannot be found! Are you sure you installed NitroModules properly?
 #endif
 
+// Forward declaration of `ImageSize` to properly resolve imports.
+namespace margelo::nitro::image { struct ImageSize; }
 
-
-
+#include <optional>
+#include "ImageSize.hpp"
 
 namespace margelo::nitro::image {
 
@@ -30,10 +32,11 @@ namespace margelo::nitro::image {
   struct AssetImageLoadOptions {
   public:
     double hi     SWIFT_PRIVATE;
+    std::optional<ImageSize> size     SWIFT_PRIVATE;
 
   public:
     AssetImageLoadOptions() = default;
-    explicit AssetImageLoadOptions(double hi): hi(hi) {}
+    explicit AssetImageLoadOptions(double hi, std::optional<ImageSize> size): hi(hi), size(size) {}
   };
 
 } // namespace margelo::nitro::image
@@ -48,12 +51,14 @@ namespace margelo::nitro {
     static inline AssetImageLoadOptions fromJSI(jsi::Runtime& runtime, const jsi::Value& arg) {
       jsi::Object obj = arg.asObject(runtime);
       return AssetImageLoadOptions(
-        JSIConverter<double>::fromJSI(runtime, obj.getProperty(runtime, "hi"))
+        JSIConverter<double>::fromJSI(runtime, obj.getProperty(runtime, "hi")),
+        JSIConverter<std::optional<ImageSize>>::fromJSI(runtime, obj.getProperty(runtime, "size"))
       );
     }
     static inline jsi::Value toJSI(jsi::Runtime& runtime, const AssetImageLoadOptions& arg) {
       jsi::Object obj(runtime);
       obj.setProperty(runtime, "hi", JSIConverter<double>::toJSI(runtime, arg.hi));
+      obj.setProperty(runtime, "size", JSIConverter<std::optional<ImageSize>>::toJSI(runtime, arg.size));
       return obj;
     }
     static inline bool canConvert(jsi::Runtime& runtime, const jsi::Value& value) {
@@ -62,6 +67,7 @@ namespace margelo::nitro {
       }
       jsi::Object obj = value.getObject(runtime);
       if (!JSIConverter<double>::canConvert(runtime, obj.getProperty(runtime, "hi"))) return false;
+      if (!JSIConverter<std::optional<ImageSize>>::canConvert(runtime, obj.getProperty(runtime, "size"))) return false;
       return true;
     }
   };

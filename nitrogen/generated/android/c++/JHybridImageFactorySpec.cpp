@@ -15,6 +15,8 @@ namespace margelo::nitro::image { struct AsyncImageLoadOptions; }
 namespace margelo::nitro::image { enum class AsyncImagePriority; }
 // Forward declaration of `AssetImageLoadOptions` to properly resolve imports.
 namespace margelo::nitro::image { struct AssetImageLoadOptions; }
+// Forward declaration of `ImageSize` to properly resolve imports.
+namespace margelo::nitro::image { struct ImageSize; }
 // Forward declaration of `ArrayBuffer` to properly resolve imports.
 namespace NitroModules { class ArrayBuffer; }
 
@@ -32,6 +34,8 @@ namespace NitroModules { class ArrayBuffer; }
 #include "JAsyncImagePriority.hpp"
 #include "AssetImageLoadOptions.hpp"
 #include "JAssetImageLoadOptions.hpp"
+#include "ImageSize.hpp"
+#include "JImageSize.hpp"
 #include <NitroModules/ArrayBuffer.hpp>
 #include <NitroModules/JArrayBuffer.hpp>
 #include <NitroModules/JUnit.hpp>

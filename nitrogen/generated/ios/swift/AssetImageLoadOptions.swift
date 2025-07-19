@@ -18,8 +18,14 @@ public extension AssetImageLoadOptions {
   /**
    * Create a new instance of `AssetImageLoadOptions`.
    */
-  init(hi: Double) {
-    self.init(hi)
+  init(hi: Double, size: ImageSize?) {
+    self.init(hi, { () -> bridge.std__optional_ImageSize_ in
+      if let __unwrappedValue = size {
+        return bridge.create_std__optional_ImageSize_(__unwrappedValue)
+      } else {
+        return .init()
+      }
+    }())
   }
 
   var hi: Double {
@@ -30,6 +36,29 @@ public extension AssetImageLoadOptions {
     @inline(__always)
     set {
       self.__hi = newValue
+    }
+  }
+  
+  var size: ImageSize? {
+    @inline(__always)
+    get {
+      return { () -> ImageSize? in
+        if let __unwrapped = self.__size.value {
+          return __unwrapped
+        } else {
+          return nil
+        }
+      }()
+    }
+    @inline(__always)
+    set {
+      self.__size = { () -> bridge.std__optional_ImageSize_ in
+        if let __unwrappedValue = newValue {
+          return bridge.create_std__optional_ImageSize_(__unwrappedValue)
+        } else {
+          return .init()
+        }
+      }()
     }
   }
 }
