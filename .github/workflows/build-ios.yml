@@ -40,7 +40,7 @@ jobs:
       - uses: oven-sh/setup-bun@v2
       
       - name: Select Xcode version
-        run: sudo xcode-select -s /Applications/Xcode_16.2.app/Contents/Developer
+        run: sudo xcode-select -s /Applications/Xcode_16.4.app/Contents/Developer
 
       - name: Install npm dependencies (bun)
         run: bun install
@@ -77,5 +77,4 @@ jobs:
           -destination 'platform=iOS Simulator,name=iPhone 16' \
           build \
           CODE_SIGNING_ALLOWED=NO \
-          IPHONEOS_DEPLOYMENT_TARGET=16.0 \
-          SWIFT_VERSION=6.0"
+          IPHONEOS_DEPLOYMENT_TARGET=16.0"
