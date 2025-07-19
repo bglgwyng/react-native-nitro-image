@@ -3,6 +3,8 @@ import type { Image } from "./Image.nitro";
 
 export type AsyncImagePriority = "low" | "default" | "high";
 
+export type AspectFit = "fit" | "fill";
+
 export interface AsyncImageLoadOptions {
     /**
      * Specifies the priority of the image download.
@@ -67,8 +69,6 @@ export interface ImageSize {
     height: number;
 }
 
-export type AspectFit = "fit" | "fill";
-
 export interface AssetImageLoadOptions {
     hi: number;
     /**
@@ -80,7 +80,7 @@ export interface AssetImageLoadOptions {
      * Specifies the aspect fit of the image.
      * @default 'fit'
      */
-    aspectFit: AspectFit;
+    aspectFit?: AspectFit;
 }
 
 export interface ImageFactory
