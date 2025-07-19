@@ -79,7 +79,7 @@ export interface AssetImageLoadOptions {
      * Specifies the aspect fit of the image.
      * @default 'fit'
      */
-    aspectFit: AspectFit;
+    aspectFit?: AspectFit;
 }
 
 export interface ImageFactory
@@ -101,7 +101,10 @@ export interface ImageFactory
      * @throws If no {@linkcode Image} exists under the given {@linkcode name}.
      * @platform iOS 8
      */
-    loadFromAssetAsync(assetId: string, options?: AssetImageLoadOptions): Promise<Image>;
+    loadFromAssetAsync(
+        assetId: string,
+        options?: AssetImageLoadOptions,
+    ): Promise<Image>;
     /**
      * Synchronously loads an {@linkcode Image} from the given {@linkcode filePath}.
      * @param filePath The file path of the {@linkcode Image}. Must contain a file extension.

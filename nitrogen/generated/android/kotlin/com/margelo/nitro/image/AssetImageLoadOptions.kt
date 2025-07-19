@@ -21,7 +21,7 @@ data class AssetImageLoadOptions
   @Keep
   constructor(
     val size: ImageSize?,
-    val aspectFit: AspectFit
+    val aspectFit: AspectFit?
   ) {
   /* main constructor */
 }
