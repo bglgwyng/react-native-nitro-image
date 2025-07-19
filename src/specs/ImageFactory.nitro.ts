@@ -80,7 +80,7 @@ export interface AssetImageLoadOptions {
      * Specifies the aspect fit of the image.
      * @default 'fit'
      */
-    aspectFit?: AspectFit;
+    aspectFit: AspectFit;
 }
 
 export interface ImageFactory

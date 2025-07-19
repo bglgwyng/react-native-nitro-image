@@ -328,15 +328,6 @@ namespace margelo::nitro::image::bridge::swift {
     return std::optional<ImageSize>(value);
   }
   
-  // pragma MARK: std::optional<AspectFit>
-  /**
-   * Specialized version of `std::optional<AspectFit>`.
-   */
-  using std__optional_AspectFit_ = std::optional<AspectFit>;
-  inline std::optional<AspectFit> create_std__optional_AspectFit_(const AspectFit& value) {
-    return std::optional<AspectFit>(value);
-  }
-  
   // pragma MARK: std::optional<AssetImageLoadOptions>
   /**
    * Specialized version of `std::optional<AssetImageLoadOptions>`.

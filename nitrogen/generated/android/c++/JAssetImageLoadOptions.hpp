@@ -44,7 +44,7 @@ namespace margelo::nitro::image {
       return AssetImageLoadOptions(
         hi,
         size != nullptr ? std::make_optional(size->toCpp()) : std::nullopt,
-        aspectFit != nullptr ? std::make_optional(aspectFit->toCpp()) : std::nullopt
+        aspectFit->toCpp()
       );
     }
 
@@ -57,7 +57,7 @@ namespace margelo::nitro::image {
       return newInstance(
         value.hi,
         value.size.has_value() ? JImageSize::fromCpp(value.size.value()) : nullptr,
-        value.aspectFit.has_value() ? JAspectFit::fromCpp(value.aspectFit.value()) : nullptr
+        JAspectFit::fromCpp(value.aspectFit)
       );
     }
   };
