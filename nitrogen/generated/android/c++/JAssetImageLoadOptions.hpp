@@ -10,11 +10,7 @@
 #include <fbjni/fbjni.h>
 #include "AssetImageLoadOptions.hpp"
 
-#include "AspectFit.hpp"
-#include "ImageSize.hpp"
-#include "JAspectFit.hpp"
-#include "JImageSize.hpp"
-#include <optional>
+
 
 namespace margelo::nitro::image {
 
@@ -35,13 +31,10 @@ namespace margelo::nitro::image {
     [[nodiscard]]
     AssetImageLoadOptions toCpp() const {
       static const auto clazz = javaClassStatic();
-      static const auto fieldSize = clazz->getField<JImageSize>("size");
-      jni::local_ref<JImageSize> size = this->getFieldValue(fieldSize);
-      static const auto fieldAspectFit = clazz->getField<JAspectFit>("aspectFit");
-      jni::local_ref<JAspectFit> aspectFit = this->getFieldValue(fieldAspectFit);
+      static const auto fieldHi = clazz->getField<double>("hi");
+      double hi = this->getFieldValue(fieldHi);
       return AssetImageLoadOptions(
-        size != nullptr ? std::make_optional(size->toCpp()) : std::nullopt,
-        aspectFit != nullptr ? std::make_optional(aspectFit->toCpp()) : std::nullopt
+        hi
       );
     }
 
@@ -52,8 +45,7 @@ namespace margelo::nitro::image {
     [[maybe_unused]]
     static jni::local_ref<JAssetImageLoadOptions::javaobject> fromCpp(const AssetImageLoadOptions& value) {
       return newInstance(
-        value.size.has_value() ? JImageSize::fromCpp(value.size.value()) : nullptr,
-        value.aspectFit.has_value() ? JAspectFit::fromCpp(value.aspectFit.value()) : nullptr
+        value.hi
       );
     }
   };

@@ -18,14 +18,9 @@
 #error NitroModules cannot be found! Are you sure you installed NitroModules properly?
 #endif
 
-// Forward declaration of `ImageSize` to properly resolve imports.
-namespace margelo::nitro::image { struct ImageSize; }
-// Forward declaration of `AspectFit` to properly resolve imports.
-namespace margelo::nitro::image { enum class AspectFit; }
 
-#include <optional>
-#include "ImageSize.hpp"
-#include "AspectFit.hpp"
+
+
 
 namespace margelo::nitro::image {
 
@@ -34,12 +29,11 @@ namespace margelo::nitro::image {
    */
   struct AssetImageLoadOptions {
   public:
-    std::optional<ImageSize> size     SWIFT_PRIVATE;
-    std::optional<AspectFit> aspectFit     SWIFT_PRIVATE;
+    double hi     SWIFT_PRIVATE;
 
   public:
     AssetImageLoadOptions() = default;
-    explicit AssetImageLoadOptions(std::optional<ImageSize> size, std::optional<AspectFit> aspectFit): size(size), aspectFit(aspectFit) {}
+    explicit AssetImageLoadOptions(double hi): hi(hi) {}
   };
 
 } // namespace margelo::nitro::image
@@ -54,14 +48,12 @@ namespace margelo::nitro {
     static inline AssetImageLoadOptions fromJSI(jsi::Runtime& runtime, const jsi::Value& arg) {
       jsi::Object obj = arg.asObject(runtime);
       return AssetImageLoadOptions(
-        JSIConverter<std::optional<ImageSize>>::fromJSI(runtime, obj.getProperty(runtime, "size")),
-        JSIConverter<std::optional<AspectFit>>::fromJSI(runtime, obj.getProperty(runtime, "aspectFit"))
+        JSIConverter<double>::fromJSI(runtime, obj.getProperty(runtime, "hi"))
       );
     }
     static inline jsi::Value toJSI(jsi::Runtime& runtime, const AssetImageLoadOptions& arg) {
       jsi::Object obj(runtime);
-      obj.setProperty(runtime, "size", JSIConverter<std::optional<ImageSize>>::toJSI(runtime, arg.size));
-      obj.setProperty(runtime, "aspectFit", JSIConverter<std::optional<AspectFit>>::toJSI(runtime, arg.aspectFit));
+      obj.setProperty(runtime, "hi", JSIConverter<double>::toJSI(runtime, arg.hi));
       return obj;
     }
     static inline bool canConvert(jsi::Runtime& runtime, const jsi::Value& value) {
@@ -69,8 +61,7 @@ namespace margelo::nitro {
         return false;
       }
       jsi::Object obj = value.getObject(runtime);
-      if (!JSIConverter<std::optional<ImageSize>>::canConvert(runtime, obj.getProperty(runtime, "size"))) return false;
-      if (!JSIConverter<std::optional<AspectFit>>::canConvert(runtime, obj.getProperty(runtime, "aspectFit"))) return false;
+      if (!JSIConverter<double>::canConvert(runtime, obj.getProperty(runtime, "hi"))) return false;
       return true;
     }
   };
