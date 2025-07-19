@@ -74,6 +74,6 @@ jobs:
           -scheme NitroImageExample \
           -sdk iphonesimulator \
           -configuration Debug \
-          -destination 'platform=iOS Simulator,name=iPhone 16' \
+          -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' \
           build \
           CODE_SIGNING_ALLOWED=NO"
